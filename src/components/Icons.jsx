@@ -275,6 +275,45 @@ export function EyeIcon({ className = "h-4 w-4" }) {
   );
 }
 
+export function EyeOffIcon({ className = "h-4 w-4" }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49" />
+      <path d="M14.084 14.158a3 3 0 0 1-4.242-4.242" />
+      <path d="M17.479 17.499A10.75 10.75 0 0 1 2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.463-5.81" />
+      <path d="m2 2 20 20" />
+    </svg>
+  );
+}
+
+export function LogOutIcon({ className = "h-4 w-4" }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+      <polyline points="16 17 21 12 16 7" />
+      <line x1="21" x2="9" y1="12" y2="12" />
+    </svg>
+  );
+}
+
 export function ArrowLeftIcon({ className = "h-4 w-4" }) {
   return (
     <svg

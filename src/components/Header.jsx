@@ -1,13 +1,36 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BellIcon, MenuIcon, SearchIcon } from "@/components/Icons";
-import { clientProfile, getPageTitle } from "@/data/dummyData";
+import {
+  BellIcon,
+  LogOutIcon,
+  MenuIcon,
+  SearchIcon,
+} from "@/components/Icons";
+import { useAuth } from "@/context/AuthContext";
+import { getPageTitle } from "@/data/dummyData";
+import { getUserInitials } from "@/lib/user";
 
 export default function Header({ onMenuClick }) {
   const pathname = usePathname();
   const title = getPageTitle(pathname);
+  const { user, logout } = useAuth();
+  const [loggingOut, setLoggingOut] = useState(false);
+
+  const displayName = user?.name || "Client";
+  const initials = getUserInitials(displayName);
+
+  const handleLogout = async () => {
+    if (loggingOut) return;
+    setLoggingOut(true);
+    try {
+      await logout();
+    } finally {
+      setLoggingOut(false);
+    }
+  };
 
   return (
     <header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b border-border bg-background/95 px-4 backdrop-blur sm:px-6 lg:px-8">
@@ -52,12 +75,24 @@ export default function Header({ onMenuClick }) {
 
       <div className="flex items-center gap-3 border-l border-border pl-3 sm:pl-4">
         <div className="flex h-9 w-9 items-center justify-center rounded-full bg-accent/20 text-sm font-semibold text-accent">
-          {clientProfile.initials}
+          {initials}
         </div>
         <div className="hidden sm:block">
-          <p className="text-sm font-medium text-white">{clientProfile.name}</p>
-          <p className="text-xs text-muted">{clientProfile.role}</p>
+          <p className="text-sm font-medium text-white">{displayName}</p>
+          <p className="text-xs text-muted">Client</p>
         </div>
+        <button
+          type="button"
+          onClick={handleLogout}
+          disabled={loggingOut}
+          className="inline-flex items-center gap-1.5 rounded-lg border border-border px-2.5 py-1.5 text-xs font-medium text-muted transition-colors hover:border-zinc-600 hover:text-white disabled:cursor-not-allowed disabled:opacity-60"
+          aria-label="Log out"
+        >
+          <LogOutIcon className="h-3.5 w-3.5" />
+          <span className="hidden sm:inline">
+            {loggingOut ? "Signing out…" : "Log out"}
+          </span>
+        </button>
       </div>
     </header>
   );
