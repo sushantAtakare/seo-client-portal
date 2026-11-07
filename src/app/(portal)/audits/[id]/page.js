@@ -1,7 +1,5 @@
-import AuditDetails from "@/components/audits/AuditDetails";
-import { getAuditById } from "@/data/dummyData";
+import AuditDetailsContent from "@/components/audits/AuditDetailsContent";
 
-export default function AuditDetailsPage({ params }) {
-  const audit = getAuditById(params.id);
-  return <AuditDetails audit={audit} />;
+export default function AuditDetailsPage() {
+  return <AuditDetailsContent />;
 }
